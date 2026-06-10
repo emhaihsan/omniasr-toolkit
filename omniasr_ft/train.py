@@ -129,8 +129,8 @@ def evaluate(model, loader, device, amp_dtype, max_batches: int = 50) -> float:
             break
         batch = batch_to_device(batch, device)
         with torch.autocast(device.type, dtype=amp_dtype, enabled=amp_dtype is not None):
-            loss = model(batch)
-        total += float(loss) / batch.source_seqs.size(0)
+            loss = model(batch) / batch.source_seqs.size(0)
+        total += float(loss)
         count += 1
     model.train()
     return total / max(1, count)
