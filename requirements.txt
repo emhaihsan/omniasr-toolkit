@@ -1,0 +1,8 @@
+omnilingual-asr>=0.2.0
+torch>=2.4.0
+torchaudio
+datasets>=2.20.0
+soundfile
+jiwer
+huggingface_hub
+pyyaml

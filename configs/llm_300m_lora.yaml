@@ -1,0 +1,39 @@
+# LoRA fine-tune omniASR_LLM_300M_v2 — fits on a free Colab T4 (16 GB).
+model_card: omniASR_LLM_300M_v2
+
+# Data: ganti sesuai dataset kamu. Contoh: Common Voice bahasa Indonesia.
+dataset: mozilla-foundation/common_voice_17_0
+dataset_config: id
+train_split: train
+valid_split: validation
+text_column: sentence
+audio_column: audio
+lang: ind_Latn            # kode bahasa omnilingual (lihat lang_ids.py)
+max_train_samples: null   # null = semua
+max_valid_samples: 200
+min_secs: 1.0
+max_secs: 20.0            # audio panjang = VRAM besar; 20s aman untuk T4
+
+# LoRA
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+extra_trainable: []       # opsi: ["final_proj", "encoder_proj"]
+
+# Optimization
+batch_size: 4
+grad_accum: 4             # batch efektif = 16
+lr: 1.0e-4
+weight_decay: 0.01
+warmup_steps: 100
+max_steps: 1000
+grad_clip: 1.0
+seed: 42
+
+# Runtime
+device: auto
+output_dir: outputs/omniasr_lora_id
+save_every: 250
+log_every: 10
+eval_every: 250
+num_workers: 2

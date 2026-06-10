@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omniasr-toolkit"
+version = "0.1.0"
+description = "Easy LoRA fine-tuning and MLX conversion for Meta's omnilingual-asr"
+requires-python = ">=3.10"
+dependencies = [
+    "omnilingual-asr>=0.2.0",
+    "torch>=2.4.0",
+    "torchaudio",
+    "datasets>=2.20.0",
+    "soundfile",
+    "jiwer",
+    "huggingface_hub",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+mlx = ["mlx>=0.21.0"]
+
+[tool.setuptools.packages.find]
+include = ["omniasr_ft*", "omniasr_mlx*"]
